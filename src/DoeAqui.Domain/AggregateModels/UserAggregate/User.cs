@@ -33,7 +33,7 @@ namespace DoeAqui.Domain.AggregateModels.UserAggregate
         {
             RuleFor(u => u.Name)
                 .NotEmpty().WithMessage("Nome é obrigatório")
-                .MinimumLength(2).MaximumLength(255).WithMessage("Nome precisa ter entre 2 255 caracteres");
+                .Length(2, 255).WithMessage("Nome precisa ter entre 2 e 255 caracteres");
 
             RuleFor(u => u.Email)
                 .NotEmpty().WithMessage("Email é obrigatório")
