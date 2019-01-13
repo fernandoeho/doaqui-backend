@@ -4,6 +4,6 @@ namespace DoeAqui.Domain.AggregateModels.UserAggregate.Repository
 {
     public interface IUserRepository : IRepository<User>
     {
-
+        User GetByEmail(string email);
     }
 }

@@ -2,6 +2,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DoeAqui.Domain.Core\DoeAqui.Domain.Core.csproj" />
+    <ProjectReference Include="..\DoeAqui.Helper\DoeAqui.Helper.csproj" />
   </ItemGroup>
 
   <PropertyGroup>

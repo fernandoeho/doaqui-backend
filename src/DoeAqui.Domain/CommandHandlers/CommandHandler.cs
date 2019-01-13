@@ -18,7 +18,7 @@ namespace DoeAqui.Domain.CommandHandlers
             _notifications = notifications;
         }
 
-        protected void VotifyValidationErrors(ValidationResult validationResult)
+        protected void NotifyValidationErrors(ValidationResult validationResult)
         {
             foreach (var error in validationResult.Errors)
             {
