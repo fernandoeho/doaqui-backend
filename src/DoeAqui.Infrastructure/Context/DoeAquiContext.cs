@@ -1,4 +1,5 @@
 using DoeAqui.Domain.AggregateModels.UserAggregate;
+using DoeAqui.Infrastructure.Mappings;
 using Microsoft.EntityFrameworkCore;
 
 namespace DoeAqui.Infrastructure.Context
@@ -9,5 +10,12 @@ namespace DoeAqui.Infrastructure.Context
             : base(options) { }
 
         public DbSet<User> Users { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            new UserMap(modelBuilder.Entity<User>());
+        }
     }
 }
