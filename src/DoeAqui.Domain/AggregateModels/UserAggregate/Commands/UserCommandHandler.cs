@@ -27,7 +27,7 @@ namespace DoeAqui.Domain.AggregateModels.UserAggregate.Commands
         {
             if (_userRepository.GetByEmail(message.Email) != null)
             {
-                _bus.SendEvent(new DomainNotification("Email", "Email já cadastrado"));
+                _bus.SendEvent(new DomainNotification(message.MessageType, "Email já cadastrado"));
                 return;
             }
 
