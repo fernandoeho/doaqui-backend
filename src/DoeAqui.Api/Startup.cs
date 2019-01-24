@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DoeAqui.Api.Configurations;
 using DoeAqui.Infrastructure.Configuration;
 using DoeAqui.Infrastructure.Context;
 using Microsoft.AspNetCore.Builder;
@@ -24,8 +25,9 @@ namespace DoeAqui.Api
 
         public void ConfigureServices(IServiceCollection services)
         {
-            var databaseSettings = _configuration.GetSection("Database").Get<DatabaseSettings>();
-            services.AddDbContext<DoeAquiContext>(options => options.UseSqlServer(databaseSettings.ConnectionString));
+            services.AddMvc();
+
+            services.AddInfrastructure(_configuration);
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -35,10 +37,7 @@ namespace DoeAqui.Api
                 app.UseDeveloperExceptionPage();
             }
 
-            app.Run(async (context) =>
-            {
-                await context.Response.WriteAsync("Hello World!");
-            });
+            app.UseMvc();
         }
     }
 }
