@@ -28,6 +28,7 @@ namespace DoeAqui.Api
             services.AddMvc();
 
             services.AddInfrastructure(_configuration);
+            services.AddAppServices();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
