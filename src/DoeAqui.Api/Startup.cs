@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DoeAqui.Api.Configurations;
+using DoeAqui.Infrastructure.Bus;
 using DoeAqui.Infrastructure.Configuration;
 using DoeAqui.Infrastructure.Context;
 using Microsoft.AspNetCore.Builder;
@@ -32,7 +33,7 @@ namespace DoeAqui.Api
             services.AddAppServices();
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IHttpContextAccessor accessor)
         {
             if (env.IsDevelopment())
             {
@@ -40,6 +41,8 @@ namespace DoeAqui.Api
             }
 
             app.UseMvc();
+
+            InMemoryBus.ContainerAccessor = () => accessor.HttpContext.RequestServices;
         }
     }
 }
