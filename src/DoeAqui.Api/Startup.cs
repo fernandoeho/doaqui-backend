@@ -27,6 +27,7 @@ namespace DoeAqui.Api
         {
             services.AddMvc();
 
+            services.AddDomain();
             services.AddInfrastructure(_configuration);
             services.AddAppServices();
         }
