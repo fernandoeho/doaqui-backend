@@ -21,8 +21,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{116CC5D9
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DoeAqui.Test.Unit", "tests\DoeAqui.Test.Unit\DoeAqui.Test.Unit.csproj", "{AA611B2B-C5FA-4722-A6AB-DE5A57472882}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DoeAqui.Tests.Integration", "tests\DoeAqui.Tests.Integration\DoeAqui.Tests.Integration.csproj", "{239E7000-1190-4A37-99D3-B97499D7048B}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
