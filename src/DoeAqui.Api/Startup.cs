@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace DoeAqui.Api
 {
@@ -33,7 +34,10 @@ namespace DoeAqui.Api
             services.AddDomain();
             services.AddInfrastructure(_configuration);
             services.AddAppServices();
+
             services.AddCors();
+
+            services.AddSwaggerDocumentation();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, IHttpContextAccessor accessor)
@@ -53,6 +57,9 @@ namespace DoeAqui.Api
                     .AllowAnyHeader()
                     .AllowAnyMethod();
             });
+
+            app.UseSwaggerDocumentation();
+
 
             InMemoryBus.ContainerAccessor = () => accessor.HttpContext.RequestServices;
         }
