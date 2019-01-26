@@ -12,14 +12,14 @@ namespace DoeAqui.Infrastructure.Bus
         public static Func<IServiceProvider> ContainerAccessor { get; set; }
         private static IServiceProvider Container => ContainerAccessor();
 
-        public void SendCommand<T>(T domainCommand) where T : Command
+        public void SendCommand<T>(T command) where T : Command
         {
-            Publish(domainCommand);
+            Publish(command);
         }
 
-        public void SendEvent<T>(T domainEvent) where T : Event
+        public void SendEvent<T>(T @event) where T : Event
         {
-            Publish(domainEvent);
+            Publish(@event);
         }
 
         private static void Publish<T>(T message) where T : Message
