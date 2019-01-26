@@ -33,6 +33,7 @@ namespace DoeAqui.Api
             services.AddDomain();
             services.AddInfrastructure(_configuration);
             services.AddAppServices();
+            services.AddCors();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, IHttpContextAccessor accessor)
@@ -45,6 +46,13 @@ namespace DoeAqui.Api
             app.UseAuthentication();
 
             app.UseMvc();
+
+            app.UseCors(builder =>
+            {
+                builder.AllowAnyOrigin()
+                    .AllowAnyHeader()
+                    .AllowAnyMethod();
+            });
 
             InMemoryBus.ContainerAccessor = () => accessor.HttpContext.RequestServices;
         }
