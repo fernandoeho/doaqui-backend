@@ -1,3 +1,4 @@
+using System;
 using DoeAqui.Application.Interfaces;
 using DoeAqui.Application.ViewModels.User;
 using DoeAqui.Domain.Core.Notifications;
@@ -14,6 +15,12 @@ namespace DoeAqui.Api.Controllers
             : base(notifications)
         {
             _userAppService = userAppService;
+        }
+
+        [HttpGet("{id:guid}")]
+        public IActionResult GetById(Guid id)
+        {
+            return Response(_userAppService.GetById(id));
         }
 
         [HttpPost]

@@ -1,3 +1,4 @@
+using System;
 using AutoMapper;
 using DoeAqui.Application.Interfaces;
 using DoeAqui.Application.ViewModels.User;
@@ -24,6 +25,11 @@ namespace DoeAqui.Application.Services
         {
             var command = _mapper.Map<CreateUserCommand>(createUserViewModel);
             _bus.SendCommand(command);
+        }
+
+        public UserViewModel GetById(Guid id)
+        {
+            return _mapper.Map<UserViewModel>(_userRepository.GetById(id));
         }
     }
 }
