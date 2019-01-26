@@ -10,7 +10,7 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace DoeAqui.Api.Configurations
 {
-    public static class JwtConfig
+    public static class JwtExtension
     {
         public static IServiceCollection AddJwt(this IServiceCollection services, IConfiguration configuration)
         {

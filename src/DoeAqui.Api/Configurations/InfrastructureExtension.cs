@@ -15,7 +15,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace DoeAqui.Api.Configurations
 {
-    public static class InfrastructureConfig
+    public static class InfrastructureExtension
     {
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {

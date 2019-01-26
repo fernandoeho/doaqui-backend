@@ -6,7 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace DoeAqui.Api.Configurations
 {
-    public static class DomainConfig
+    public static class DomainExtension
     {
         public static IServiceCollection AddDomain(this IServiceCollection services)
         {

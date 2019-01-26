@@ -4,7 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace DoeAqui.Api.Configurations
 {
-    public static class AppServicesConfig
+    public static class AppServicesExtension
     {
         public static IServiceCollection AddAppServices(this IServiceCollection services)
         {

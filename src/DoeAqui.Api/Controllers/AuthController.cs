@@ -28,7 +28,7 @@ namespace DoeAqui.Api.Controllers
             if (!IsValid())
                 return Response();
 
-            var jwtResponse = JwtConfig.GetToken(userVM, _configuration);
+            var jwtResponse = JwtExtension.GetToken(userVM, _configuration);
 
             return Response(jwtResponse);
         }
