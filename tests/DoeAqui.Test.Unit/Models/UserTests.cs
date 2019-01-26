@@ -2,7 +2,7 @@ using System;
 using DoeAqui.Domain.AggregateModels.UserAggregate;
 using Xunit;
 
-namespace DoeAqui.Test.Tests.Models
+namespace DoeAqui.Test.Unit.Models
 {
     public class UserTests
     {
