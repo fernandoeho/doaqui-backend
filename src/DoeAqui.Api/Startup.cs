@@ -26,6 +26,8 @@ namespace DoeAqui.Api
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddJwt(_configuration);
+
             services.AddMvc();
 
             services.AddDomain();
@@ -39,6 +41,8 @@ namespace DoeAqui.Api
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseAuthentication();
 
             app.UseMvc();
 

@@ -5,6 +5,8 @@ using DoeAqui.Application.ViewModels.User;
 using DoeAqui.Domain.AggregateModels.UserAggregate.Commands;
 using DoeAqui.Domain.AggregateModels.UserAggregate.Repository;
 using DoeAqui.Domain.Core.Bus;
+using DoeAqui.Domain.Core.Notifications;
+using DoeAqui.Helper;
 
 namespace DoeAqui.Application.Services
 {
@@ -21,9 +23,30 @@ namespace DoeAqui.Application.Services
             _userRepository = userRepository;
         }
 
-        public void Create(CreateUserViewModel createUserViewModel)
+        public UserViewModel Authenticate(LoginViewModel vm)
         {
-            var command = _mapper.Map<CreateUserCommand>(createUserViewModel);
+            var user = _userRepository.GetByEmail(vm.Email);
+
+            if (user == null)
+            {
+                _bus.SendEvent(new DomainNotification("User", "Verifique email/senha e tente novamente"));
+                return null;
+            }
+
+            string hashedPassword = Cryptography.Hash(vm.Password, user.PasswordSalt);
+
+            if (hashedPassword != user.Password)
+            {
+                _bus.SendEvent(new DomainNotification("User", "Verifique email/senha e tente novamente"));
+                return null;
+            }
+
+            return _mapper.Map<UserViewModel>(user);
+        }
+
+        public void Create(CreateUserViewModel vm)
+        {
+            var command = _mapper.Map<CreateUserCommand>(vm);
             _bus.SendCommand(command);
         }
 
