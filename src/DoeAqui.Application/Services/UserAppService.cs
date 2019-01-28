@@ -54,5 +54,11 @@ namespace DoeAqui.Application.Services
         {
             return _mapper.Map<UserViewModel>(_userRepository.GetById(id));
         }
+
+        public void Update(UpdateUserViewModel vm)
+        {
+            var command = _mapper.Map<UpdateUserCommand>(vm);
+            _bus.SendCommand(command);
+        }
     }
 }

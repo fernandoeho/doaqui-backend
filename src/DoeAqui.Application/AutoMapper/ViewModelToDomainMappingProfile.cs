@@ -10,6 +10,9 @@ namespace DoeAqui.Application.AutoMapper
         {
             CreateMap<CreateUserViewModel, CreateUserCommand>()
                 .ConstructUsing(c => new CreateUserCommand(c.Name, c.Email, c.Password, c.Phone));
+
+            CreateMap<UpdateUserViewModel, UpdateUserCommand>()
+                .ConstructUsing(c => new UpdateUserCommand(c.Id, c.Name, c.Email, c.Password, c.Phone));
         }
     }
 }

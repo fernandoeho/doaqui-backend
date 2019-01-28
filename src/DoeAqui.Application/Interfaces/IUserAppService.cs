@@ -8,5 +8,6 @@ namespace DoeAqui.Application.Interfaces
         UserViewModel Authenticate(LoginViewModel vm);
         UserViewModel GetById(Guid id);
         void Create(CreateUserViewModel vm);
+        void Update(UpdateUserViewModel vm);
     }
 }
