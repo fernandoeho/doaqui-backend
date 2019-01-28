@@ -59,7 +59,8 @@ namespace DoeAqui.Domain.AggregateModels.UserAggregate.Commands
                 return;
             }
 
-            if (_userRepository.GetByEmail(message.Email).Id != user.Id)
+            var userToCheckEmail = _userRepository.GetByEmail(message.Email);
+            if (userToCheckEmail != null && userToCheckEmail.Id != user.Id)
             {
                 _bus.SendEvent(new DomainNotification(message.MessageType, "Email já cadastrado"));
                 return;

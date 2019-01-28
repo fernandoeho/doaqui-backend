@@ -15,9 +15,12 @@ namespace DoeAqui.Api.Configurations
 
             // Commands
             services.AddScoped<IHandler<CreateUserCommand>, UserCommandHandler>();
+            services.AddScoped<IHandler<UpdateUserCommand>, UserCommandHandler>();
 
             // Events
             services.AddScoped<IHandler<UserCreatedEvent>, UserEventHandler>();
+            services.AddScoped<IHandler<UserUpdatedEvent>, UserEventHandler>();
+
             return services;
         }
     }
