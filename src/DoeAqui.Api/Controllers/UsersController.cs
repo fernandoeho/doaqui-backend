@@ -32,5 +32,13 @@ namespace DoeAqui.Api.Controllers
 
             return Response();
         }
+
+        [HttpPut]
+        public IActionResult Put([FromBody]UpdateUserViewModel vm)
+        {
+            _userAppService.Update(vm);
+
+            return Response();
+        }
     }
 }
