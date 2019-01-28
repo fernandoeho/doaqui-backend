@@ -11,7 +11,8 @@ using DoeAqui.Helper;
 namespace DoeAqui.Domain.AggregateModels.UserAggregate.Commands
 {
     public class UserCommandHandler : CommandHandler,
-        IHandler<CreateUserCommand>
+        IHandler<CreateUserCommand>,
+        IHandler<UpdateUserCommand>
     {
         private readonly IUserRepository _userRepository;
         private readonly IBus _bus;
@@ -46,6 +47,39 @@ namespace DoeAqui.Domain.AggregateModels.UserAggregate.Commands
 
             if (Commit())
                 _bus.SendEvent(new UserCreatedEvent(user.Id, user.Name, user.Email, user.Password, user.Phone));
+        }
+
+        public void Handle(UpdateUserCommand message)
+        {
+            var user = _userRepository.GetById(message.Id);
+
+            if (user == null)
+            {
+                _bus.SendEvent(new DomainNotification(message.MessageType, "Usuário não encontrado"));
+                return;
+            }
+
+            if (_userRepository.GetByEmail(message.Email).Id != user.Id)
+            {
+                _bus.SendEvent(new DomainNotification(message.MessageType, "Email já cadastrado"));
+                return;
+            }
+
+            var passwordSalt = Cryptography.Salt();
+            var passwordHash = Cryptography.Hash(message.Password, passwordSalt);
+
+            user.Update(message.Name, message.Email, passwordHash, passwordSalt, message.Phone);
+
+            if (!user.IsValid())
+            {
+                NotifyValidationErrors(user.ValidationResult);
+                return;
+            }
+
+            _userRepository.Update(user);
+
+            if (Commit())
+                _bus.SendEvent(new UserUpdatedEvent(user.Id, user.Name, user.Email, user.Password, user.Phone));
         }
     }
 }

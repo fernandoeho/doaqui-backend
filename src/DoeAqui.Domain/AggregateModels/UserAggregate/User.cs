@@ -22,6 +22,15 @@ namespace DoeAqui.Domain.AggregateModels.UserAggregate
         public string PasswordSalt { get; private set; }
         public string Phone { get; private set; }
 
+        public void Update(string name, string email, string password, string passwordSalt, string phone)
+        {
+            Name = name;
+            Email = email;
+            Password = password;
+            PasswordSalt = passwordSalt;
+            Phone = phone;
+        }
+
         public override bool IsValid()
         {
             Validate();
