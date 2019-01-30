@@ -9,7 +9,5 @@ namespace DoeAqui.Domain.Core.Commands
         {
             DateTimeStamp = DateTime.UtcNow;
         }
-
-        public DateTime DateTimeStamp { get; private set; }
     }
 }

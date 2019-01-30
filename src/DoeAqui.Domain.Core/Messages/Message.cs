@@ -11,5 +11,6 @@ namespace DoeAqui.Domain.Core.Messages
 
         public Guid AggregateId { get; protected set; }
         public string MessageType { get; protected set; }
+        public DateTime DateTimeStamp { get; protected set; }
     }
 }
