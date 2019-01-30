@@ -7,7 +7,7 @@ namespace DoeAqui.Domain.AggregateModels.ProductAggregate
 {
     public class Product : Entity<Product>
     {
-        public Product(Guid id, string title, string description, int quantity, string size, EStatus status)
+        public Product(Guid id, string title, string description, int quantity, string size, EStatus status, EFreight freight)
         {
             Id = id;
             Title = title;
@@ -15,6 +15,7 @@ namespace DoeAqui.Domain.AggregateModels.ProductAggregate
             Quantity = quantity;
             Size = size;
             Status = status;
+            Freight = freight;
         }
 
         public string Title { get; private set; }
@@ -22,6 +23,7 @@ namespace DoeAqui.Domain.AggregateModels.ProductAggregate
         public int Quantity { get; private set; }
         public string Size { get; set; }
         public EStatus Status { get; private set; }
+        public EFreight Freight { get; private set; }
 
         public override bool IsValid()
         {
@@ -47,6 +49,9 @@ namespace DoeAqui.Domain.AggregateModels.ProductAggregate
                 .MaximumLength(25).WithMessage("Tamanho precisa ter no máximo 8 caracteres");
 
             RuleFor(p => p.Status)
+                .IsInEnum();
+
+            RuleFor(p => p.Freight)
                 .IsInEnum();
 
             ValidationResult = Validate(this);
