@@ -19,6 +19,12 @@ namespace DoeAqui.Api.Controllers
             _userAppService = userAppService;
         }
 
+        [HttpGet]
+        public IActionResult GetAction()
+        {
+            return Response(_userAppService.GetAll());
+        }
+
         [HttpGet("{id:guid}")]
         public IActionResult GetById(Guid id)
         {
@@ -26,6 +32,7 @@ namespace DoeAqui.Api.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public IActionResult Post([FromBody]CreateUserViewModel vm)
         {
             _userAppService.Create(vm);

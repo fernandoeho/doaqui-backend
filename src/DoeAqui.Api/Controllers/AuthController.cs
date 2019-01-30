@@ -2,12 +2,14 @@ using DoeAqui.Api.Configurations;
 using DoeAqui.Application.Interfaces;
 using DoeAqui.Application.ViewModels.User;
 using DoeAqui.Domain.Core.Notifications;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 
 namespace DoeAqui.Api.Controllers
 {
     [Route("api/[controller]")]
+    [AllowAnonymous]
     public class AuthController : BaseController
     {
         private readonly IUserAppService _userAppService;

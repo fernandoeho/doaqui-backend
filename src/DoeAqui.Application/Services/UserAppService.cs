@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using AutoMapper;
 using DoeAqui.Application.Interfaces;
 using DoeAqui.Application.ViewModels.User;
@@ -48,6 +49,11 @@ namespace DoeAqui.Application.Services
         {
             var command = _mapper.Map<CreateUserCommand>(vm);
             _bus.SendCommand(command);
+        }
+
+        public IEnumerable<UserViewModel> GetAll()
+        {
+            return _mapper.Map<IEnumerable<UserViewModel>>(_userRepository.GetAll());
         }
 
         public UserViewModel GetById(Guid id)

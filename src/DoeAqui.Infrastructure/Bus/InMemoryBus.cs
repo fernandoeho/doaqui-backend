@@ -4,13 +4,20 @@ using DoeAqui.Domain.Core.Commands;
 using DoeAqui.Domain.Core.Events;
 using DoeAqui.Domain.Core.Messages;
 using DoeAqui.Domain.Core.Notifications;
+using Microsoft.AspNetCore.Http;
 
 namespace DoeAqui.Infrastructure.Bus
 {
     public class InMemoryBus : IBus
     {
-        public static Func<IServiceProvider> ContainerAccessor { get; set; }
-        private static IServiceProvider Container => ContainerAccessor();
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly IServiceProvider _serviceProvider;
+
+        public InMemoryBus(IHttpContextAccessor httpContextAccessor)
+        {
+            _httpContextAccessor = httpContextAccessor;
+            _serviceProvider = httpContextAccessor.HttpContext.RequestServices;
+        }
 
         public void SendCommand<T>(T command) where T : Command
         {
@@ -22,11 +29,11 @@ namespace DoeAqui.Infrastructure.Bus
             Publish(@event);
         }
 
-        private static void Publish<T>(T message) where T : Message
+        private void Publish<T>(T message) where T : Message
         {
-            if (Container == null) return;
+            if (_serviceProvider == null) return;
 
-            var obj = Container.GetService(message.MessageType.Equals("DomainNotification") ? typeof(IDomainNotificationHandler<T>) : typeof(IHandler<T>));
+            var obj = _serviceProvider.GetService(message.MessageType.Equals("DomainNotification") ? typeof(IDomainNotificationHandler<T>) : typeof(IHandler<T>));
 
             ((IHandler<T>)obj).Handle(message);
         }

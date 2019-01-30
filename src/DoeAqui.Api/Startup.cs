@@ -59,9 +59,6 @@ namespace DoeAqui.Api
             });
 
             app.UseSwaggerDocumentation();
-
-
-            InMemoryBus.ContainerAccessor = () => accessor.HttpContext.RequestServices;
         }
     }
 }
