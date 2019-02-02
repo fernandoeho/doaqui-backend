@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using DoeAqui.Domain.AggregateModels.ProductAggregate.Enums;
 using DoeAqui.Domain.Core.Models;
 using FluentValidation;
@@ -7,7 +8,7 @@ namespace DoeAqui.Domain.AggregateModels.ProductAggregate
 {
     public class Product : Entity<Product>
     {
-        public Product(Guid id, string title, string description, int quantity, string size, EStatus status, EFreight freight)
+        public Product(Guid id, string title, string description, int quantity, string size, EStatus status, EFreight freight, string imageUrl)
         {
             Id = id;
             Title = title;
@@ -16,6 +17,7 @@ namespace DoeAqui.Domain.AggregateModels.ProductAggregate
             Size = size;
             Status = status;
             Freight = freight;
+            ImageUrl = imageUrl;
         }
 
         public string Title { get; private set; }
@@ -24,6 +26,7 @@ namespace DoeAqui.Domain.AggregateModels.ProductAggregate
         public string Size { get; set; }
         public EStatus Status { get; private set; }
         public EFreight Freight { get; private set; }
+        public string ImageUrl { get; private set; }
 
         public override bool IsValid()
         {
@@ -53,6 +56,9 @@ namespace DoeAqui.Domain.AggregateModels.ProductAggregate
 
             RuleFor(p => p.Freight)
                 .IsInEnum();
+
+            RuleFor(p => p.ImageUrl)
+                .NotEmpty().WithMessage("Imagem é obrigatóro");
 
             ValidationResult = Validate(this);
         }
