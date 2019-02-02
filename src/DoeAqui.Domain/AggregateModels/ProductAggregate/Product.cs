@@ -23,7 +23,7 @@ namespace DoeAqui.Domain.AggregateModels.ProductAggregate
         public string Title { get; private set; }
         public string Description { get; private set; }
         public int Quantity { get; private set; }
-        public string Size { get; set; }
+        public string Size { get; private set; }
         public EStatus Status { get; private set; }
         public EFreight Freight { get; private set; }
         public string ImageUrl { get; private set; }
