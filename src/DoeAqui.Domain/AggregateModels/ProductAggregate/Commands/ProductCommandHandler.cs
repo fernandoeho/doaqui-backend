@@ -24,7 +24,7 @@ namespace DoeAqui.Domain.AggregateModels.ProductAggregate.Commands
 
         public void Handle(CreateProductCommand message)
         {
-            var product = new Product(Guid.NewGuid(), message.Title, message.Description, message.Quantity, message.Size, message.Status, message.Freight, message.ImageUrl);
+            var product = new Product(Guid.NewGuid(), message.Title, message.Description, message.Quantity, message.Size, message.Status, message.Freight, message.ImageUrl, message.UserId);
 
             if (!product.IsValid())
             {

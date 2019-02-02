@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using DoeAqui.Domain.AggregateModels.ProductAggregate;
 using DoeAqui.Domain.Core.Models;
 using FluentValidation;
 
@@ -21,6 +23,7 @@ namespace DoeAqui.Domain.AggregateModels.UserAggregate
         public string Password { get; private set; }
         public string PasswordSalt { get; private set; }
         public string Phone { get; private set; }
+        public ICollection<Product> Products { get; private set; }
 
         public void Update(string name, string email, string password, string passwordSalt, string phone)
         {

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using DoeAqui.Domain.AggregateModels.ProductAggregate.Enums;
+using DoeAqui.Domain.AggregateModels.UserAggregate;
 using DoeAqui.Domain.Core.Models;
 using FluentValidation;
 
@@ -8,7 +9,7 @@ namespace DoeAqui.Domain.AggregateModels.ProductAggregate
 {
     public class Product : Entity<Product>
     {
-        public Product(Guid id, string title, string description, int quantity, string size, EStatus status, EFreight freight, string imageUrl)
+        public Product(Guid id, string title, string description, int quantity, string size, EStatus status, EFreight freight, string imageUrl, Guid userId)
         {
             Id = id;
             Title = title;
@@ -18,6 +19,7 @@ namespace DoeAqui.Domain.AggregateModels.ProductAggregate
             Status = status;
             Freight = freight;
             ImageUrl = imageUrl;
+            UserId = userId;
         }
 
         public string Title { get; private set; }
@@ -27,6 +29,9 @@ namespace DoeAqui.Domain.AggregateModels.ProductAggregate
         public EStatus Status { get; private set; }
         public EFreight Freight { get; private set; }
         public string ImageUrl { get; private set; }
+        public Guid UserId { get; private set; }
+
+        public virtual User User { get; set; }
 
         public override bool IsValid()
         {
