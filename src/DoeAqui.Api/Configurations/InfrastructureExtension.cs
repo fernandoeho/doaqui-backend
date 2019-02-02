@@ -1,5 +1,6 @@
 using AutoMapper;
 using DoeAqui.Application.AutoMapper;
+using DoeAqui.Domain.AggregateModels.ProductAggregate.Repository;
 using DoeAqui.Domain.AggregateModels.UserAggregate.Repository;
 using DoeAqui.Domain.Core.Bus;
 using DoeAqui.Domain.Interfaces;
@@ -28,6 +29,7 @@ namespace DoeAqui.Api.Configurations
 
             // Repositories
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IProductRepository, ProductRepository>();
 
             // AutoMapper
             services.AddScoped<IMapper>(sp => new Mapper(AutoMapperConfiguration.RegisterMappingProfiles()));

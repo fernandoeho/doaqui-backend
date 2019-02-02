@@ -9,6 +9,7 @@ namespace DoeAqui.Api.Configurations
         public static IServiceCollection AddAppServices(this IServiceCollection services)
         {
             services.AddScoped<IUserAppService, UserAppService>();
+            services.AddScoped<IProductAppService, ProductAppService>();
 
             return services;
         }
