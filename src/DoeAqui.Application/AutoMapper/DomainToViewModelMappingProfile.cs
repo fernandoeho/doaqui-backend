@@ -11,6 +11,7 @@ namespace DoeAqui.Application.AutoMapper
         public DomainToViewModelMappingProfile()
         {
             CreateMap<User, UserViewModel>();
+
             CreateMap<Product, ProductViewModel>();
         }
     }

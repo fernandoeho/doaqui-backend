@@ -29,7 +29,7 @@ namespace DoeAqui.Application.Services
 
         public ProductViewModel GetById(Guid id)
         {
-            return _mapper.Map<ProductViewModel>(_productRepository.GetById(id));
+            return _mapper.Map<ProductViewModel>(_productRepository.GetByIdWithUser(id));
         }
     }
 }
