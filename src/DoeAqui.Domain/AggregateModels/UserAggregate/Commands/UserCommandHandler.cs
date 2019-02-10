@@ -66,8 +66,21 @@ namespace DoeAqui.Domain.AggregateModels.UserAggregate.Commands
                 return;
             }
 
-            var passwordSalt = Cryptography.Salt();
-            var passwordHash = Cryptography.Hash(message.Password, passwordSalt);
+            string passwordHash;
+            string passwordSalt;
+
+            if (!string.IsNullOrEmpty(message.Password))
+            {
+                passwordSalt = Cryptography.Salt();
+                passwordHash = Cryptography.Hash(message.Password, passwordSalt);
+            }
+            else
+            {
+                passwordSalt = user.PasswordSalt;
+                passwordHash = user.Password;
+            }
+
+
 
             user.Update(message.Name, message.Email, passwordHash, passwordSalt, message.Phone);
 
