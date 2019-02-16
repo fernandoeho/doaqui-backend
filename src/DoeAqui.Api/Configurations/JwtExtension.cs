@@ -30,35 +30,5 @@ namespace DoeAqui.Api.Configurations
 
             return services;
         }
-
-        public static object GetToken(UserViewModel vm, IConfiguration configuration)
-        {
-            var tokenHandler = new JwtSecurityTokenHandler();
-
-            var key = Encoding.ASCII.GetBytes(configuration.GetSection("Jwt:Key").Value);
-
-            var tokenDescriptor = new SecurityTokenDescriptor
-            {
-                Subject = new ClaimsIdentity(new Claim[]
-                {
-                    new Claim(ClaimTypes.NameIdentifier, vm.Id.ToString()),
-                    new Claim(ClaimTypes.Name, vm.Name),
-                    new Claim(ClaimTypes.Email, vm.Email)
-                }),
-                Expires = DateTime.UtcNow.AddDays(1),
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha512Signature)
-            };
-
-            var token = tokenHandler.CreateToken(tokenDescriptor);
-
-            var tokenString = tokenHandler.WriteToken(token);
-
-            var response = new
-            {
-                access_token = tokenString
-            };
-
-            return response;
-        }
     }
 }

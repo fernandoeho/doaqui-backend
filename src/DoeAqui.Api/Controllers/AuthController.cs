@@ -25,14 +25,12 @@ namespace DoeAqui.Api.Controllers
         [HttpPost]
         public IActionResult Post([FromBody]LoginViewModel vm)
         {
-            var userVM = _userAppService.Authenticate(vm);
+            var response = _userAppService.Authenticate(vm);
 
             if (!IsValid())
                 return Response();
 
-            var jwtResponse = JwtExtension.GetToken(userVM, _configuration);
-
-            return Response(jwtResponse);
+            return Response(response);
         }
     }
 }

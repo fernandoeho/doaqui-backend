@@ -6,7 +6,7 @@ namespace DoeAqui.Application.Interfaces
 {
     public interface IUserAppService
     {
-        UserViewModel Authenticate(LoginViewModel vm);
+        object Authenticate(LoginViewModel vm);
         UserViewModel GetById(Guid id);
         IEnumerable<UserViewModel> GetAll();
         void Create(CreateUserViewModel vm);
