@@ -1,10 +1,13 @@
 using System;
+using System.Collections.Generic;
 using AutoMapper;
 using DoeAqui.Application.Interfaces;
 using DoeAqui.Application.ViewModels.Product;
 using DoeAqui.Domain.AggregateModels.ProductAggregate.Commands;
+using DoeAqui.Domain.AggregateModels.ProductAggregate.Enums;
 using DoeAqui.Domain.AggregateModels.ProductAggregate.Repository;
 using DoeAqui.Domain.Core.Bus;
+using DoeAqui.Helper.Enums;
 
 namespace DoeAqui.Application.Services
 {
@@ -30,6 +33,16 @@ namespace DoeAqui.Application.Services
         public ProductViewModel GetById(Guid id)
         {
             return _mapper.Map<ProductViewModel>(_productRepository.GetByIdWithUser(id));
+        }
+
+        public IEnumerable<EnumValue> GetFreights()
+        {
+            return EnumExtensions.GetValues<EFreight>();
+        }
+
+        public IEnumerable<EnumValue> GetStatus()
+        {
+            return EnumExtensions.GetValues<EStatus>();
         }
     }
 }

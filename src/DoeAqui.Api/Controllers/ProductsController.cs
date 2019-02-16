@@ -25,6 +25,18 @@ namespace DoeAqui.Api.Controllers
             return Response(_productAppService.GetById(id));
         }
 
+        [HttpGet("freights")]
+        public IActionResult GetFreights()
+        {
+            return Response(_productAppService.GetFreights());
+        }
+
+        [HttpGet("status")]
+        public IActionResult GetStatus()
+        {
+            return Response(_productAppService.GetStatus());
+        }
+
         [HttpPost]
         public IActionResult Post([FromBody]CreateProductViewModel vm)
         {
