@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using DoeAqui.Domain.AggregateModels.ProductAggregate.Enums;
 using DoeAqui.Domain.AggregateModels.UserAggregate;
 using DoeAqui.Domain.Core.Models;
