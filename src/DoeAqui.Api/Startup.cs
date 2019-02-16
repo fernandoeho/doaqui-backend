@@ -6,6 +6,7 @@ using DoeAqui.Api.Configurations;
 using DoeAqui.Infrastructure.Bus;
 using DoeAqui.Infrastructure.Configuration;
 using DoeAqui.Infrastructure.Context;
+using DoeAqui.Infrastructure.IoC;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -31,9 +32,7 @@ namespace DoeAqui.Api
 
             services.AddMvc();
 
-            services.AddDomain();
-            services.AddInfrastructure(_configuration);
-            services.AddAppServices();
+            services.RegisterServices(_configuration);
 
             services.AddCors();
 
@@ -49,8 +48,6 @@ namespace DoeAqui.Api
 
             app.UseAuthentication();
 
-            app.UseMvc();
-
             app.UseCors(builder =>
             {
                 builder.AllowAnyOrigin()
@@ -59,6 +56,8 @@ namespace DoeAqui.Api
             });
 
             app.UseSwaggerDocumentation();
+
+            app.UseMvc();
         }
     }
 }

@@ -16,6 +16,7 @@
   <ItemGroup>
     <ProjectReference Include="..\DoeAqui.Infrastructure\DoeAqui.Infrastructure.csproj" />
     <ProjectReference Include="..\DoeAqui.Application\DoeAqui.Application.csproj" />
+    <ProjectReference Include="..\DoeAqui.Infrastructure.IoC\DoeAqui.Infrastructure.IoC.csproj" />
   </ItemGroup>
 
 </Project>
