@@ -1,19 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using DoeAqui.Api.Configurations;
-using DoeAqui.Infrastructure.Bus;
-using DoeAqui.Infrastructure.Configuration;
-using DoeAqui.Infrastructure.Context;
+﻿using DoeAqui.Api.Configurations;
 using DoeAqui.Infrastructure.IoC;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Swashbuckle.AspNetCore.Swagger;
 
 namespace DoeAqui.Api
 {
@@ -28,18 +18,14 @@ namespace DoeAqui.Api
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddJwt(_configuration);
-
             services.AddMvc();
-
+            services.AddJwt(_configuration);
             services.RegisterServices(_configuration);
-
             services.AddCors();
-
             services.AddSwaggerDocumentation();
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IHttpContextAccessor accessor)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             if (env.IsDevelopment())
             {
